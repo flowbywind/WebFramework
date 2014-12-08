@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>个性化皮肤设置</title>
+    <!--框架必需start-->
+    <link href="~/Content/Styles/learunui-framework.css" rel="stylesheet" />
+    <script src="~/Content/Scripts/jquery/jquery-1.8.2.min.js"></script>
+    <script src="~/Content/Scripts/learunui-framework.js"></script>
+    <!--框架必需end-->
+    <script>
+        $(function () {
+            $('.skinSelect').click(function () {
+                var color = $(this).attr('background');
+                top.$(".header").css('background', color);
+                top.$("#footer").css('background', color);
+            })
+        })
+        //切换主题
+        function SwitchTheme() {
+            var theme = $("#theme").val();
+            if (confirm('您确认要切换UI主题吗？系统将会自动刷新')) {
+                Loading(true, "正在切换主题UI...");
+                window.setTimeout(function () {
+                    AjaxJson("/Home/SwitchTheme", { UItheme: theme }, function (data) {
+                        top.location.href = "/Home/" + theme;
+                    });
+                }, 200);
+            }
+        }
+    </script>
+</head>
+<body style="margin: 1px;">
+    <div class="bd" style="border-bottom: none; margin-top: 1px;">
+        <div class="tipstitle_title settingtable bold bd todayInfoPanelTab rightPanelTitle_normal">
+            <div class="tab_list_top" style="position: absolute">
+                <div class="tab_list bd actived">UI风格设置</div>
+            </div>
+        </div>
+    </div>
+    <div class="border" style="border-top: none; padding: 20px;">
+        界面主题：
+        <select id="theme" class="keyword" onchange="SwitchTheme()">
+            <option value="AccordionIndex">抽屉式手风琴</option>
+            <option value="TreeIndex">树形无限级手风琴</option>
+            <option value="StartIndex">Windos开始菜单</option>
+        </select>
+    </div>
+    <div class="bd" style="border-bottom: none; margin-top: 1px;">
+        <div class="tipstitle_title settingtable bold bd todayInfoPanelTab rightPanelTitle_normal">
+            <div class="tab_list_top" style="position: absolute">
+                <div class="tab_list bd actived">皮肤设置</div>
+            </div>
+        </div>
+    </div>
+    <div style="border-top: none;">
+        <div class="skinSelect" background="#4A5B79" style="background: #4A5B79"></div>
+        <div class="skinSelect" background="#2e3e4e" style="background: #2e3e4e"></div>
+        <div class="skinSelect" background="#1e71b1" style="background: #1e71b1"></div>
+        <div class="skinSelect" background="#B1181B" style="background: #B1181B"></div>
+        <div class="skinSelect" background="#34495e" style="background: #34495e"></div>
+        <div class="skinSelect" background="#28b779" style="background: #28b779"></div>
+        <div class="skinSelect" background="#ffb848" style="background: #ffb848"></div>
+        <div class="skinSelect" background="#852b99" style="background: #852b99"></div>
+        <div class="skinSelect" background="#623f18" style="background: #623f18"></div>
+        <div class="skinSelect" background="#333438" style="background: #333438"></div>
+        <div class="skinSelect" background="#9BBD33" style="background: #9BBD33"></div>
+        <div class="skinSelect" background="#C6487E" style="background: #C6487E"></div>
+    </div>
+</body>
+</html>
+<style>
+    .skinSelect {
+        float: left;
+        width: 55px;
+        height: 46px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 20px;
+        display: block;
+        position: relative;
+        cursor: pointer;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        box-shadow: 0 0 15px #ccc;
+    }
+</style>

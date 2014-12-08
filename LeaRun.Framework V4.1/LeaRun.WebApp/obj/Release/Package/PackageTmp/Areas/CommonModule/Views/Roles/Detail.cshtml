@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "角色管理》明细页面";
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        $(".ScrollBar").height($(window).height() - 114);
+        InitControl();
+        ModulePermissionTree();
+        ButtonePermissionTree();
+        ViewPermissionTree();
+    })
+    //得到一个对象实体
+    function InitControl() {
+        if (!!GetQuery('KeyValue')) {
+            getAjax("/CommonModule/Roles/SetForm", { KeyValue: GetQuery('KeyValue') }, function (data) {
+                var data = eval("(" + data + ")");
+                SetWebLable(data);
+            });
+        }
+    }
+    //模块权限
+    function ModulePermissionTree() {
+        var itemtree = {
+            url: "/CommonModule/Permission/LookModulePermission?ObjectId=" + GetQuery('KeyValue')
+        };
+        $("#ModulePermission").treeview(itemtree);
+    }
+    //按钮权限
+    function ButtonePermissionTree() {
+        var itemtree = {
+            url: "/CommonModule/Permission/LookButtonePermission?ObjectId=" + GetQuery('KeyValue')
+        };
+        $("#ButtonePermission").treeview(itemtree);
+    }
+    //视图权限
+    function ViewPermissionTree() {
+        var itemtree = {
+            url: "/CommonModule/Permission/LookViewPermission?ObjectId=" + GetQuery('KeyValue')
+        };
+        $("#ViewPermission").treeview(itemtree);
+    }
+</script>
+<div style="margin: 1px; margin-bottom: 0px;">
+    <table class="form">
+        <tr>
+            <th class="formTitle">角色编码：</th>
+            <td class="formValue">
+                <label id="Code"></label>
+            </td>
+            <th class="formTitle">角色名称：</th>
+            <td class="formValue">
+                <label id="FullName"></label>
+            </td>
+            <th class="formTitle">角色分类：</th>
+            <td class="formValue">
+                <label id="Category"></label>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">角色描述：
+            </th>
+            <td class="formValue" colspan="5">
+                <label id="Remark"></label>
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">创建用户：</th>
+            <td class="formValue">
+                <label id="CreateUserName"></label>
+            </td>
+            <th class="formTitle">创建时间：</th>
+            <td class="formValue">
+                <label id="CreateDate"></label>
+            </td>
+            <th class="formTitle">修改时间：</th>
+            <td class="formValue">
+                <label id="ModifyDate"></label>
+            </td>
+        </tr>
+    </table>
+    <style>
+        .form .formValue {
+            width: 22%;
+        }
+    </style>
+    <table class="topline rightline" border="0" cellpadding="0" cellspacing="0" style="margin-top: 1px;">
+        <tr>
+            <td style="width:272px;">
+                <div class="bd" style="border-top: none;border-right: none; margin-bottom: 1px;">
+                    <div class="tipstitle_title settingtable bold bd todayInfoPanelTab rightPanelTitle_normal">
+                        <div class="tab_list_top" style="position: absolute">
+                            <div class="tab_list bd actived">拥有模块权限</div>
+                        </div>
+                    </div>
+                    <div class="ScrollBar" id="ModulePermission"></div>
+                </div>
+            </td>
+            <td style="width:273px;">
+                <div class="bd" style="border-top: none; border-right: none;margin-bottom: 1px;">
+                    <div class="tipstitle_title settingtable bold bd todayInfoPanelTab rightPanelTitle_normal">
+                        <div class="tab_list_top" style="position: absolute">
+                            <div class="tab_list bd actived">按钮权限</div>
+                        </div>
+                    </div>
+                    <div class="ScrollBar" id="ButtonePermission"></div>
+                </div>
+            </td>
+            <td style="width:272px;">
+                <div class="bd" style="border-top: none; border-right: none;margin-bottom: 1px;">
+                    <div class="tipstitle_title settingtable bold bd todayInfoPanelTab rightPanelTitle_normal">
+                        <div class="tab_list_top" style="position: absolute">
+                            <div class="tab_list bd actived">视图权限</div>
+                        </div>
+                    </div>
+                    <div class="ScrollBar" id="ViewPermission"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

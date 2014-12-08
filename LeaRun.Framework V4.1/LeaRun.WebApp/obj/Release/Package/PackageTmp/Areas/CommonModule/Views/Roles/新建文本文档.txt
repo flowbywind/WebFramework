@@ -1,0 +1,152 @@
+@{
+    ViewBag.Title = "角色管理";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#layoutRightPanel").splitter({
+            splitHorizontal: true,
+            outline: true,
+            sizeTop: 330, minTop: 330, maxTop: 330,
+            accessKey: "V"
+        });
+        GetTree();
+        GetGrid();
+    });
+    var CompanyId = "", CompanyName = "";
+    //加载左边树
+    function GetTree() {
+        var itemtree = {
+            onnodeclick: function (item) {
+                CompanyId = item.id;            //ID
+                CompanyName = item.text;        //名称
+                GetGrid(CompanyId);
+                $("#CenterTitle").html(CompanyName);
+            },
+            url: "/CommonModule/Company/TreeJson"
+        };
+        $("#ItemsTree").treeview(itemtree);
+    }
+    //加载表格
+    function GetGrid() {
+        var DataGrid = {
+            url: "/CommonModule/Roles/ListJson?CompanyId=" + CompanyId,
+            orderField: "SortCode",
+            orderType: "asc",
+            topVisible: false,
+            scrollModel: { horizontal: false },
+            selectionModel: { type: 'row', mode: 'single' },
+            sortable: false,
+            column: [
+                { dataIndx: "roleid", title: "主键", hidden: true },
+                { dataIndx: "code", title: "编码", width: 80, align: "center" },
+                { dataIndx: "fullname", title: "角色", width: 100 },
+                { dataIndx: "category", title: "分类", width: 80, align: "center" },
+                { dataIndx: "companyname", title: "所属公司", width: 120 },
+                {
+                    dataIndx: "enabled", title: "有效", width: 45, align: "center",
+                    render: function (ui) {
+                        var value = ui.rowData[ui.dataIndx];
+                        if (value == '0')
+                            return "<img src='/Content/Images/checknomark.gif'/>";
+                        else
+                            return "<img src='/Content/Images/checkokmark.gif'/>";
+                    }
+                },
+                { dataIndx: "remark", title: "描述", width: 600 }
+            ],
+        }
+        var $GirdId = $("#grid_paging");
+        PqGrid($GirdId, DataGrid);
+        pqGridResize($GirdId, 256);
+    }
+    //新增
+    function btn_add() {
+        var url = "/CommonModule/Roles/Form?CompanyId=" + CompanyId
+        openDialog(url, "Form", "新增角色", 450, 240, function (iframe) {
+            top.frames[iframe].AcceptClick()
+        });
+    }
+    //编辑
+    function btn_edit() {
+        var KeyValue = GetPqGridRowValue("#grid_paging", "RoleId");
+        if (IsChecked(KeyValue)) {
+            var url = "/CommonModule/Roles/Form?KeyValue=" + KeyValue;
+            openDialog(url, "Form", "编辑角色", 450, 240, function (iframe) {
+                top.frames[iframe].AcceptClick();
+            });
+        }
+    }
+    //删除
+    function btn_delete() {
+        var KeyValue = GetPqGridRowValue("#grid_paging", "RoleId");
+        if (IsDelData(KeyValue)) {
+            var delparm = 'KeyValue=' + KeyValue;
+            delConfig('/CommonModule/Roles/Delete', delparm, KeyValue.split(",").length);
+        }
+    }
+    //刷新
+    function windowload() {
+        var $GirdId = $("#grid_paging");
+        var rowIndx = GetPqGridRowIndx($GirdId);
+        $GirdId.pqGrid("refreshDataAndView");
+        $GirdId.pqGrid({
+            load: function (event, ui) {
+                //停留在当前选中行
+                $GirdId.pqGrid("setSelection", { rowIndx: rowIndx });
+            }
+        });
+    }
+</script>
+<div id="layout" class="layout">
+    <!--左边-->
+    <div class="layoutPanel layout-west">
+        <div class="btnbartitle">
+            <div>
+                公司目录
+            </div>
+        </div>
+        <div class="ScrollBar" id="ItemsTree"></div>
+    </div>
+    <!--中间-->
+    <div id="layoutRightPanel" class="layoutPanel layout-center">
+        <div id="TopPanel">
+            <div class="btnbartitle">
+                <div>
+                    角色列表 - <span id="CenterTitle">未选择左边公司 </span>
+                </div>
+            </div>
+            <div class="tools_bar" style="border-top: none; margin-bottom: 0px;">
+                <a id="Replace" title="刷新当前(Ctrl+Q)" onclick="Replace();" class="tools_btn"><span><b style="background: url('/Content/Images/Icon16/arrow_refresh.png') 50% 4px no-repeat;">刷新</b></span></a><div class="tools_separator"></div>
+                <a id="add" title="新增(Ctrl+Z)" onclick="btn_add();" class="tools_btn"><span><b style="background: url('/Content/Images/Icon16/add.png') 50% 4px no-repeat;">新增</b></span></a>
+                <a id="edit" title="编辑(Ctrl+W)" onclick="btn_edit();" class="tools_btn"><span><b style="background: url('/Content/Images/Icon16/edit.gif') 50% 4px no-repeat;">编辑</b></span></a>
+                <a id="Delete" title="删除(Ctrl+S)" onclick="btn_delete();" class="tools_btn"><span><b style="background: url('/Content/Images/Icon16/DeleteRed.png') 50% 4px no-repeat;">删除</b></span></a>
+                <a id="Lookup" title="详细信息(Ctrl+X)" onclick="Lookup();" class="tools_btn"><span><b style="background: url('/Content/Images/Icon16/application_view_detail.png') 50% 4px no-repeat;">明细</b></span></a>
+                <div class="tools_separator"></div>
+                <a id="Leave" title="关闭当前窗口(Esc)" onclick="ThisCloseTab();" class="tools_btn"><span><b style="background: url('/Content/Images/Icon16/back.png') 50% 4px no-repeat;">离开</b></span></a>
+            </div>
+            <div id="grid_paging"></div>
+        </div>
+        <div id="BottomPanel">
+            <div class="bd" style="border: none;">
+                <div class="tipstitle_title settingtable bold bd todayInfoPanelTab rightPanelTitle_normal">
+                    <div class="tab_list_top" style="position: absolute">
+                        <div id="TabMember" class="tab_list bd actived" onclick="Tabchange('ColumnField')">成员列表</div>
+                        <div id="TabAccess" class="tab_list bd " onclick="Tabchange('WhereField');">访问权限</div>
+                        <div id="TabOperate" class="tab_list bd " onclick="Tabchange('WhereField');">操作权限</div>
+                        <div id="TabView" class="tab_list bd " onclick="Tabchange('WhereField');">视图权限</div>
+                        <div id="TabDataScope" class="tab_list bd " onclick="Tabchange('WhereField');">数据范围</div>
+                        <div id="TabDocument" class="tab_list bd " onclick="Tabchange('WhereField');">文件权限</div>
+                    </div>
+                </div>
+                <div class="ScrollBar" style="margin-top: 1px;">
+                    <div id="ColumnField" class="tabPanel topline">
+                    </div>
+                    <div id="WhereField" class="tabPanel topline" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

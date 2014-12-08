@@ -1,0 +1,7 @@
+2014-12-08 15:49:38,762 [10] ERROR LeaRun.DataAccess.DbHelper - Cannot attach the file 'D:\Download\后台模板\LeaRun.Framework V4.1\LeaRun.WebApp\App_Data\LearunDemo.mdf' as database 'aspnet-MvcApplication1-20141208154405'.
+2014-12-08 15:52:00,918 [12] ERROR LeaRun.DataAccess.DbHelper - Cannot attach the file 'D:\Download\后台模板\LeaRun.Framework V4.1\LeaRun.WebApp\App_Data\LearunDemo.mdf' as database 'aspnet-MvcApplication1-20141208154405'.
+2014-12-08 16:06:14,457 [26] ERROR LeaRun.DataAccess.DbHelper - Cannot attach the file 'D:\Download\后台模板\LeaRun.Framework V4.1\LeaRun.WebApp\App_Data\LearunDemo.mdf' as database 'aspnet-MvcApplication1-20141208154405'.
+2014-12-08 16:07:03,367 [41] ERROR LeaRun.DataAccess.DbHelper - Cannot attach the file 'D:\Download\后台模板\LeaRun.Framework V4.1\LeaRun.WebApp\App_Data\LearunDemo.mdf' as database 'aspnet-MvcApplication1-20141208154405'.
+2014-12-08 16:08:33,898 [40] ERROR LeaRun.DataAccess.DbHelper - Cannot attach the file 'D:\Download\后台模板\LeaRun.Framework V4.1\LeaRun.WebApp\App_Data\LearunDemo.mdf' as database 'LearunDemo'.
+2014-12-08 16:09:37,544 [42] ERROR LeaRun.DataAccess.DbHelper - Invalid object name 'Base_Module'.
+2014-12-08 16:14:17,243 [17] ERROR LeaRun.DataAccess.DbHelper - Invalid object name 'Base_Module'.

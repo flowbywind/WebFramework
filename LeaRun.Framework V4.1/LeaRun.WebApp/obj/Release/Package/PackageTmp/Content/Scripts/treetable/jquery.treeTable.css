@@ -1,0 +1,140 @@
+/* jQuery TreeTable Core 2.0 stylesheet
+ *
+ * This file contains styles that are used to display the tree table. Each tree
+ * table is assigned the +treeTable+ class.
+ * ========================================================================= */
+
+/* jquery.treeTable.collapsible
+ * ------------------------------------------------------------------------- */
+
+/*****Ê÷±í¸ñ****/
+.example
+{
+    margin: 0px;
+    margin-top:1px;
+    border-collapse: collapse;
+    width: 100%;
+    border-bottom:1px solid #ccc;
+}
+.example thead td {
+    border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	border-right:1px solid #ccc;
+	text-align:left;
+	font-weight:normal;
+	text-overflow:ellipsis;
+	word-break:keep-all;
+	overflow:hidden;
+	background-color:#F7F7F7;
+}
+.example thead td .table-header {
+    padding:6px 2px;
+    background-color:#F2F2F2;
+	background:-webkit-linear-gradient(top,#ffffff 0,#F2F2F2 100%);
+	background:-moz-linear-gradient(top,#ffffff 0,#F2F2F2 100%);
+	background:-o-linear-gradient(top,#ffffff 0,#F2F2F2 100%);
+	background:linear-gradient(to bottom,#ffffff 0,#F2F2F2 100%);
+	background-repeat:repeat-x;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#F2F2F2,GradientType=0);
+}
+.example tbody tr td
+{
+    text-align:left;
+    border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	height:23px;
+    line-height:23px;
+	word-break:break-all;
+    padding-left:2px;
+    border-left-color:#ccc; border-left-style:solid; border-left-width:1px 
+}
+.example .td-div {
+	background-color:#F7F7F7;
+	color:#222;
+	cursor:pointer;
+}
+.example td img {
+	vertical-align:middle;
+	border:0px solid #fff;
+    margin-bottom:2px;
+}
+.treeTable tr td .expander
+{
+	background-position: left center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	padding: 0;
+	zoom: 1; /* IE7 Hack */
+}
+
+.treeTable tr.collapsed td .expander
+{
+	background-image: url(Images/plus.gif);
+}
+
+.treeTable tr.expanded td .expander
+{
+	background-image: url(Images/minus.gif);
+}
+
+/* jquery.treeTable.sortable
+ * ------------------------------------------------------------------------- */
+.treeTable tr.selected, .treeTable tr.accept
+{
+    background-color: #4A5B79;
+    color: #fff;
+}
+.treeTable tr.tdhover
+{
+    background-color: #eee;
+}
+
+.treeTable tr.collapsed.selected td .expander, .treeTable tr.collapsed.accept td .expander
+{
+	background-image: url(Images/plus.gif);
+}
+
+.treeTable tr.expanded.selected td .expander, .treeTable tr.expanded.accept td .expander
+{
+	background-image: url(Images/minus.gif);
+}
+
+.treeTable .ui-draggable-dragging
+{
+	color: #000;
+	z-index: 1;
+}
+
+.treeTable span.folder
+{
+	background-position: center left;
+	background-repeat: no-repeat;
+	padding: .2em 0 .2em 1.5em;
+}
+
+.treeTable span.file
+{
+	background-image: url(Images/page_white_text.png);
+}
+
+.treeTable span.folder
+{
+	background-image: url(Images/folder.png);
+	vertical-align: middle;
+}
+.treeTable span.folderNode
+{
+	background-position: center left;
+	background-repeat: no-repeat;
+	padding: .1em 0 .2em 1.5em;
+}
+.treeTable span.folderNode
+{
+	background-image: url(Images/file.gif);
+}
+.treeTable span.foldersystem
+{
+	background-position: center left;
+	background-repeat: no-repeat;
+	padding: .1em 0 .2em 1.5em;
+}

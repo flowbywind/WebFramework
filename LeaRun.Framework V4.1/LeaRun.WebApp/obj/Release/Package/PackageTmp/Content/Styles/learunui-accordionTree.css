@@ -1,0 +1,88 @@
+﻿.navigation {
+    width: 204px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    margin-right: 0px;
+    float: left;
+    background-color: #F2F2F2;
+}
+.ContentPannel {
+    margin: 0px auto;
+    height: 100%;
+    overflow: hidden;
+}
+.btn-nav-toggle {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-left: 1px solid #ccc;
+    text-align: center;
+}
+.btn-nav-toggle i {
+    margin-top: 10px;
+    margin-left: 9px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    background: url(../Images/layout_arrows.png) repeat-x;
+}
+.btn-nav-toggle b {
+    display:none;
+    margin-top: 10px;
+    margin-left: 9px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    background: url(../Images/layout_arrows.png) repeat-x;
+    background-position-y: 97%;
+}
+.accordion {
+    width: 100%;
+    max-width: 360px;
+    margin: 0px auto 0px;
+    background: #F2F2F2;
+}
+.accordion .link {
+    cursor: pointer;
+    display: block;
+    padding: 0px 0px 0px 42px;
+    height: 35px;
+    line-height: 35px;
+    color: #4D4D4D;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom: 1px solid #CCC;
+    position: relative;
+}
+.accordion li .img {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 18px;
+    color: #595959;
+    cursor: pointer;
+}
+.accordion li i.chevron-down {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    width: 16px;
+    height: 16px;
+    display: block;
+    background: url(../Images/layout_arrows.png) repeat-x;
+    background-position-x: 500%;
+}
+.accordion li.open i.chevron-down {
+    background: url(../Images/layout_arrows.png) repeat-x;
+    background-position-x: 500%;
+    background-position-y: 97%;
+}
+/**
+* Submenu
+-----------------------------*/
+.submenu {
+    display: none;
+    background: #FFF;
+    font-size: 14px;
+    overflow:auto;
+}

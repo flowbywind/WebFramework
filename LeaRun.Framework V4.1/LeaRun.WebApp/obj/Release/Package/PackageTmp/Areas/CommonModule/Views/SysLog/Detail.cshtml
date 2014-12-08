@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "系统日志》明细页面";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<script type="text/javascript">
+    $(function () {
+        GetGrid();
+    })
+    //加载表格
+    function GetGrid() {
+        var DataGrid = {
+            url: "/CommonModule/SysLog/GetSysLogDetailJson?SysLogId=" + GetQuery('SysLogId'),
+            topVisible: false,
+            scrollModel: { horizontal: false },
+            sortable: false,
+            column: [
+                { dataIndx: "ButtonId", title: "明细主键", hidden: true },
+                { dataIndx: "PropertyName", title: "属性名称", width: 200 },
+                { dataIndx: "PropertyField", title: "属性字段", width: 200 },
+                { dataIndx: "NewValue", title: "属性新值", width: 200 },
+                { dataIndx: "OldValue", title: "属性旧值", width: 200 }
+            ],
+        }
+        var $GirdId = $("#grid_paging");
+        PqGrid($GirdId, DataGrid)
+        pqGridResize($GirdId, -2);
+    }
+</script>
+<div class="border" style="margin: 1px;">
+    <div id="grid_paging"></div>
+    <div id="Other" style="font-size: 18pt; display: none;" >
+    </div>
+</div>
